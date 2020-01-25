@@ -203,6 +203,8 @@
 #define LIBRG_INTERNAL zpl_internal
 #endif
 
+#define zpl_inline          inline
+
 #define librg_global        zpl_global
 #define librg_inline        zpl_inline
 #define librg_internal      zpl_internal
