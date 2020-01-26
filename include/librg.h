@@ -3148,7 +3148,7 @@ extern "C" {
         return NULL;
     }
 
-    librg_inline void librg__execute_server_entity_insert(librg_ctx *ctx) {
+    librg_internal void librg__execute_server_entity_insert(librg_ctx *ctx) {
         librg_assert(ctx);
 
         // fill up
@@ -3172,7 +3172,7 @@ extern "C" {
         });
     }
 
-    librg_inline void librg__execute_server_entity_destroy(librg_ctx *ctx) {
+    librg_internal void librg__execute_server_entity_destroy(librg_ctx *ctx) {
         for (isize i = 0; i < zpl_array_count(ctx->entity.remove_queue); i++) {
             librg__world_entity_destroy(ctx, ctx->entity.remove_queue[i]);
         }
@@ -3180,7 +3180,7 @@ extern "C" {
         zpl_array_clear(ctx->entity.remove_queue);
     }
 
-    librg_inline void librg__execture_server_entity_control(librg_ctx *ctx) {
+    librg_internal void librg__execute_server_entity_control(librg_ctx *ctx) {
         librg_entity_iteratex(ctx, LIBRG_ENTITY_CONTROL_REQUESTED, (entity), {
             librg_entity_fetch(ctx, entity)->flags &= ~LIBRG_ENTITY_CONTROL_REQUESTED;
         });
@@ -3206,7 +3206,7 @@ extern "C" {
 
             librg__execute_server_entity_update(ctx); /* create and send updates to all clients */
             librg__execute_server_entity_destroy(ctx); /* destroy queued entities */
-            librg__execture_server_entity_control(ctx); /* send controll add for created entities */
+            librg__execute_server_entity_control(ctx); /* send controll add for created entities */
         } else {
             librg__execute_client_update(ctx); /* send information about client updates */
         }
